@@ -27,9 +27,11 @@ if __name__ == '__main__':
         else:
             ldi[wordc]=list((word,))
         if(wordc==319):
-            print(word)
+            print("the word with lettersum 319 is :",word)
         if(wordc%2==1):
             oddn+=1
+
+    print("\n number of oddnumbered lettersum words is:",oddn)
 
     for key in ldi.keys():
         for i in range(0,len(ldi[key])):
@@ -43,30 +45,29 @@ if __name__ == '__main__':
                     print(ldi[key][i])
                     print(ldi[key][f])
 
-    liset=[]
-    bpliset=[]
+    liset=["aba","asw"]
+    bpliset=[1,2]
 
     for key in sorted(ldi.keys()):
-        liset.append(sorted(ldi[key][0], key=len,reverse=True))
+        flag=False
+        if type(ldi[key][0]) is str:
+            liset.append(sorted(ldi[key], key=len,reverse=True)[0])
+        else:
+            liset.append(ldi[key])
         for f in sorted(ldi.keys()):
             if (f>key):
                 for k in sorted(ldi[f], key=len,reverse=True):
                     if(len(k)<len(liset[(len(liset)-1)])):
                         liset.append(k)
-                        print(k)
+                        flag=True
+                        break
         if(len(liset)>len(bpliset)):
             bpliset=liset
-    print("======================")
-    print(bpliset)
-    print("======================")
+        liset=[]
+
+
+    print("extra 6 list:",bpliset)
 
     frequenter=mode(lettersums)
-    frequentercount=0
-    for line in Lines:
-        word=line.rstrip()
-        if(lettersum(word)==frequenter):
-            print(word, end=' : ')
-            frequentercount+=1
-    print()
-    print(frequentercount)
-    print(oddn)
+    print ("\nmost frequent lettersum words:")
+    print (ldi[frequenter])
